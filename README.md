@@ -20,11 +20,14 @@
 | created_at | timestamp |
 | updated_at | timestamp |
 
+# task_label table
+| カラム名 | データ型 |
+| ------- | ------- |
+| task_id | bigint |
+| label_id | bigint |
+
 # label table
 
 | カラム名 | データ型 |
 | ------- | ------- |
-| label_1 | string  |
-| label_2 | string  |
-| label_3 | string  |
-| task_id | bigint  |
+| name | string  |
