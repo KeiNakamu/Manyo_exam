@@ -1,24 +1,33 @@
-# README
+# markdown記法でテーブルスキーマ（モデル名、カラム名、データ型）を記載する
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# user table
 
-Things you may want to cover:
+| カラム名 | データ型 |
+| -------- | -------- |
+| name  | string |
+| email | string |
+| password_digest | string |
 
-* Ruby version
+# task table
 
-* System dependencies
+| カラム名 | データ型 |
+| ------ | ------- |
+| title | string |
+| content | text |
+| status | string |
+| due | string |
+| user_id | bigint |
+| created_at | timestamp |
+| updated_at | timestamp |
 
-* Configuration
+# task_label table
+| カラム名 | データ型 |
+| ------- | ------- |
+| task_id | bigint |
+| label_id | bigint |
 
-* Database creation
+# label table
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| カラム名 | データ型 |
+| ------- | ------- |
+| name | string  |
