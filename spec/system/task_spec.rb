@@ -32,7 +32,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
         # have_contentされているか。（含まれているか。）ということをexpectする（確認・期待する）
-        binding.irb
+        # binding.irb
         expect(page).to have_content 'test'
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
