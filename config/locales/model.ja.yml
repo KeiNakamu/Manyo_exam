@@ -1,0 +1,27 @@
+ja:
+  view:
+    Tasks: タスク管理
+    Title: タイトル
+    Content: 内容
+    Show: 詳細
+    Edit: 編集
+    Destroy: 削除
+    New_Task: 新規登録
+    Editing_Task: 編集画面
+    Back: 戻る
+  activerecord:
+    models:
+      blog: ブログ
+      user: ユーザー
+    attributes:
+      blog:
+        title: タイトル
+        content: 内容
+      user:
+        title: タイトル
+        name: 名前
+        email: メールアドレス
+        current_password: 現在のパスワード
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        remember_me: ログインを記憶
