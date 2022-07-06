@@ -3,7 +3,9 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(created_at: "DESC")
+    @tasks = Task.all.order(title: "DESC") if params[:sort_title]
+    @tasks = Task.all.order(content: "DESC") if params[:sort_content]
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -57,14 +59,25 @@ class TasksController < ApplicationController
     end
   end
 
+  def search
+    selection = params[:keyword]
+    @tasks = Task.sort(selection)
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def task_params
       params.require(:task).permit(:title, :content, :id)
+    end
+
+    def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    end
+    
+    def sort_column
+    Task.column_names.include?(params[:sort]) ? params[:sort] : 'id'
     end
 end
