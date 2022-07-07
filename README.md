@@ -33,9 +33,14 @@
 | name | string  |
 
 
-| Herokuにデプロイする方法 |
-| --------------------- |
-| Herokuに新しいアプリケーションを作成する |
-| コミットする |
-| Herokuにデプロイをする |
-| マイグレーション（テーブル作成）は手動で実行する |
+# Herokuにデプロイする方法
+## 1.Herokuに新しいアプリケーションを作成する
+### $ heroku create
+## 2.コミットする
+### $ git add -A
+### $ git commit -m "init"
+## 3.Herokuにデプロイをする
+### $ git push heroku step2:master
+
+## 4.Herokuデータベースの作成は自動で行われますが、マイグレーション（テーブル作成）は手動で実行する必要がある。必要に応じて以下のようにマイグレーションを行う。
+### $ heroku run rails db:migrate
