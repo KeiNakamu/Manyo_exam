@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(title: "DESC") if params[:sort_title]
-    @tasks = Task.all.order(content: "DESC") if params[:sort_content]
+    @tasks = Task.all.order(deadline: "DESC") if params[:sort_deadline]
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -70,7 +70,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:title, :content, :id)
+      params.require(:task).permit(:title, :content, :deadline, :id)
     end
 
     def sort_direction
