@@ -39,7 +39,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:task, title: 'test1', deadline: '2022_07_15')
         FactoryBot.create(:task, title: 'test2', deadline: '2022_07_17')
         visit tasks_path
-        # binding.irb
+        binding.irb
         find(:xpath, '/html/body/table/thead/tr/th[3]/a').click
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'test2'

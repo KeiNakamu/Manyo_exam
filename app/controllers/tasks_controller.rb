@@ -6,6 +6,8 @@ class TasksController < ApplicationController
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(title: "DESC") if params[:sort_title]
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_deadline]
+# binding.irb
+    @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%") if params[:task].present?
   end
 
   # GET /tasks/1 or /tasks/1.json
