@@ -3,12 +3,5 @@ class Task < ApplicationRecord
     validates :content, presence: true
     validates :deadline, presence: true
     validates :status, presence: true
-    # def self.search
-    #     if search
-    #     Task.where(['title LIKE ?', "%#{keyword}%"])
-    #     else
-    #     Task.all
-    #     end
-    # end
-
+    enum status:{選択してください: 1, 未着手: 2,着手中: 3,完了: 4}
 end
