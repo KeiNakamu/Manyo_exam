@@ -10,6 +10,7 @@ ja:
     Editing_Task: 編集画面
     Back: 戻る
     Deadline: 終了期限
+    Status: ステータス
   activerecord:
     models:
       blog: ブログ
