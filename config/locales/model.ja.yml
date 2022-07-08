@@ -1,8 +1,8 @@
 ja:
   view:
     Tasks: タスク管理
-    Title: タイトル
-    Content: 内容
+    Title: タスク名
+    Content: 詳しい内容
     Show: 詳細
     Edit: 編集
     Destroy: 削除

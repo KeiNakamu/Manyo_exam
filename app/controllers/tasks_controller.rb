@@ -6,13 +6,12 @@ class TasksController < ApplicationController
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(title: "DESC") if params[:sort_title]
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_deadline]
-    
+
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:status].present?
-        @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%")
-        @tasks = Task.where(status: params[:task][:status])
+        @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%").or(Task.where(status: params[:task][:status]))
       elsif params[:task][:title].present?
-        @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%") if params[:task].present?
+        @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%")
       elsif params[:task][:status].present?
         @tasks = Task.where(status: params[:task][:status])
       end
@@ -70,11 +69,6 @@ class TasksController < ApplicationController
       format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  def search
-    selection = params[:keyword]
-    @tasks = Task.sort(selection)
   end
 
   private
