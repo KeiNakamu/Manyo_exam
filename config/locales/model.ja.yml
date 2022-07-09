@@ -11,6 +11,7 @@ ja:
     Back: 戻る
     Deadline: 終了期限
     Status: ステータス
+    created_at: 登録日時
   activerecord:
     models:
       blog: ブログ
