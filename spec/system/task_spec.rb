@@ -7,8 +7,8 @@ RSpec.describe 'タスク管理機能', type: :system do
             visit new_task_path
             fill_in "task[title]", with:"test"
             fill_in "task[content]", with:"test"
-            # fill_in "task["
-            find(:xpath, '/html/body/form/div[4]/input').click
+            click_on '登録する'
+            # find(:xpath, '/html/body/form/div[4]/input').click
             expect(page).to have_content 'test'
       end
     end
@@ -36,14 +36,17 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '終了期限でソートした場合' do
       it '終了期限の降順で表示される' do
-        FactoryBot.create(:task, title: 'test1', deadline: '2022_07_15')
-        FactoryBot.create(:task, title: 'test2', deadline: '2022_07_17')
+        FactoryBot.create(:task, title: 'test1', deadline: '2022_07_17')
+        FactoryBot.create(:task, title: 'test2', deadline: '2022_07_01')
+        FactoryBot.create(:task, title: 'test3', deadline: '2022_07_12')
         visit tasks_path
+        click_on "終了期限"
         binding.irb
-        find(:xpath, '/html/body/table/thead/tr/th[3]/a').click
+        # find(:xpath, '/html/body/table/thead/tr/th[3]/a').click
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'test2'
-        expect(task_list[1]).to have_content 'test1'
+        expect(task_list[0]).to have_content 'test1'
+        expect(task_list[1]).to have_content 'test3'
+        expect(task_list[2]).to have_content 'test2'
       end
     end
   end
