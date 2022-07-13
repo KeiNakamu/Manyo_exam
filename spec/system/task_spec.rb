@@ -9,6 +9,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in "task[content]", with:"test"
         fill_in "task[deadline]", with: DateTime.now
         select '未着手', from: 'task[status]'
+        select '中', from: 'task[priority]'
         click_on '登録する'
         # find(:xpath, '/html/body/form/div[4]/input').click
         expect(page).to have_content 'test'
@@ -79,12 +80,26 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:third_task, title: 'test3')
         visit tasks_path
         click_on "終了期限"
-        # binding.irb
+        binding.irb
         # find(:xpath, '/html/body/table/thead/tr/th[3]/a').click
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'test3'
-        expect(task_list[1]).to have_content 'test2'
+        expect(task_list[0]).to have_content 'test2'
+        expect(task_list[1]).to have_content 'test3'
         expect(task_list[2]).to have_content 'test1'
+      end
+    end
+    context '優先度でソートした場合' do
+      it '優先度の高い順で表示される' do
+        FactoryBot.create(:task, title: 'test1')
+        FactoryBot.create(:second_task, title: 'test2')
+        FactoryBot.create(:third_task, title: 'test3')
+        visit tasks_path
+        click_on '優先度'
+        binding.irb
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'test1'
+        expect(task_list[1]).to have_content 'test2'
+        expect(task_list[2]).to have_content 'test3'
       end
     end
   end
