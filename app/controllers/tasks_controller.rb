@@ -19,6 +19,7 @@ class TasksController < ApplicationController
       # @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%")if params[:task][:title].present?
       # @tasks = @tasks.where(status: params[:task][:status])if params[:task][:status].present?
     end
+    @tasks = Task.all.page(params[:page]).per(5)
   end
 
   # GET /tasks/1 or /tasks/1.json
