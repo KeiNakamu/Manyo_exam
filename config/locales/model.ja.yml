@@ -12,6 +12,7 @@ ja:
     Deadline: 終了期限
     Status: ステータス
     created_at: 登録日時
+    Priority: 優先度
   activerecord:
     models:
       blog: ブログ

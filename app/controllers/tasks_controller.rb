@@ -6,6 +6,7 @@ class TasksController < ApplicationController
     @tasks = Task.all.order(created_at: "DESC")
     @tasks = Task.all.order(title: "DESC") if params[:sort_title]
     @tasks = Task.all.order(deadline: "DESC") if params[:sort_deadline]
+    @tasks = Task.all.order(priority: "ASC") if params[:sort_priority]
 
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:status].present?
@@ -79,7 +80,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:title, :content, :deadline, :status, :id)
+      params.require(:task).permit(:title, :content, :deadline, :status, :priority, :id)
     end
 
     def sort_direction
