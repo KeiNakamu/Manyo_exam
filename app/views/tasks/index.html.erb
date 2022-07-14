@@ -11,12 +11,15 @@
 </div>
 
 <br><button class="btn btn-primary ml-2 " type="submit"><%= link_to t('view.New_Task'), new_task_path, class: "link" %></button>
-
+<br>
 <div class="table-responsive-sm">
   <div class="m-2 p-5">
+  <th><%= t('view.task_count') %></th>
+  <%= current_user.tasks.count %>
     <table class="table">
       <thead>
         <tr>
+          <th scope="col"><%= t('view.User') %></th>
           <th scope = "col" ><%= t('view.Title') %></th>
           <th scope = "col"><%= t('view.Content')%></th>
           <th scope = "col" ><%= link_to t('view.Deadline'), tasks_path(sort_deadline: "true") %></th>
@@ -28,8 +31,9 @@
       </thead>
 
       <tbody>
-        <% @tasks.each do |task| %>
+        <% current_user.tasks.each do |task| %>
           <tr class = "task_row">
+            <td><%= task.user.name %></td>
             <td><%= task.title %></td>
             <td><%= task.content %></td>
             <td><%= task.deadline %></td>

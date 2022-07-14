@@ -1,5 +1,6 @@
 ja:
   view:
+    User: 名前
     Tasks: タスク管理
     Title: タスク名
     Content: 詳しい内容
@@ -13,6 +14,15 @@ ja:
     Status: ステータス
     created_at: 登録日時
     Priority: 優先度
+    Profile: プロフィール
+    my_page: マイページ
+    Sign_up: サインアップ
+    Login: ログイン
+    Logout: ログアウト
+    Log_in: ログイン画面
+    NewUser: 登録画面
+    list_page: 一覧画面
+    task_count: タスク数
   activerecord:
     models:
       blog: ブログ
