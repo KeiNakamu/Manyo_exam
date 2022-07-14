@@ -80,7 +80,8 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:third_task, title: 'test3')
         visit tasks_path
         click_on "終了期限"
-        binding.irb
+        sleep(0.5)
+        # binding.irb
         # find(:xpath, '/html/body/table/thead/tr/th[3]/a').click
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'test2'
@@ -95,7 +96,8 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:third_task, title: 'test3')
         visit tasks_path
         click_on '優先度'
-        binding.irb
+        sleep(0.5)
+        # binding.irb
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'test1'
         expect(task_list[1]).to have_content 'test2'
