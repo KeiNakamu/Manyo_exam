@@ -1,14 +1,18 @@
 ja:
   view:
     Tasks: タスク管理
-    Title: タイトル
-    Content: 内容
+    Title: タスク名
+    Content: 詳しい内容
     Show: 詳細
     Edit: 編集
     Destroy: 削除
     New_Task: 新規登録
     Editing_Task: 編集画面
     Back: 戻る
+    Deadline: 終了期限
+    Status: ステータス
+    created_at: 登録日時
+    Priority: 優先度
   activerecord:
     models:
       blog: ブログ

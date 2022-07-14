@@ -3,9 +3,24 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC")
-    @tasks = Task.all.order(title: "DESC") if params[:sort_title]
-    @tasks = Task.all.order(content: "DESC") if params[:sort_content]
+    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(5)
+    # @tasks = Task.order(created_at: "DESC")
+    # @tasks = Task.order(title: "DESC").page(params[:page]).per(5) if params[:sort_title]
+    @tasks = Task.order(deadline: "DESC").page(params[:page]).per(5) if params[:sort_deadline]
+    @tasks = Task.order(priority: "ASC").page(params[:page]).per(5) if params[:sort_priority]
+
+    if params[:task].present?
+      if params[:task][:title].present? && params[:task][:status].present?
+        @tasks = @tasks.search_title(params[:task][:title]).search_status(params[:task][:status]).page(params[:page]).per(5)
+      elsif params[:task][:title].present?
+        @tasks = @tasks.search_title(params[:task][:title]).page(params[:page]).per(5)
+      elsif params[:task][:status].present?
+        @tasks = @tasks.search_status(params[:task][:status]).page(params[:page]).per(5)
+      end
+      # @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%")if params[:task][:title].present?
+      # @tasks = @tasks.where(status: params[:task][:status])if params[:task][:status].present?
+    end
+    # @tasks.page(params[:page]).per(5)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -19,6 +34,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    @task = Task.find(params[:id])
   end
 
   # POST /tasks or /tasks.json
@@ -38,6 +54,7 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    params[:task]
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
@@ -59,18 +76,13 @@ class TasksController < ApplicationController
     end
   end
 
-  def search
-    selection = params[:keyword]
-    @tasks = Task.sort(selection)
-  end
-
   private
     def set_task
       @task = Task.find(params[:id])
     end
 
     def task_params
-      params.require(:task).permit(:title, :content, :id)
+      params.require(:task).permit(:title, :content, :deadline, :status, :priority, :id)
     end
 
     def sort_direction
