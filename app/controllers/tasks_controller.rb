@@ -3,23 +3,24 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC")
-    @tasks = Task.all.order(title: "DESC") if params[:sort_title]
-    @tasks = Task.all.order(deadline: "DESC") if params[:sort_deadline]
-    @tasks = Task.all.order(priority: "ASC") if params[:sort_priority]
+    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(5)
+    # @tasks = Task.order(created_at: "DESC")
+    # @tasks = Task.order(title: "DESC").page(params[:page]).per(5) if params[:sort_title]
+    @tasks = Task.order(deadline: "DESC").page(params[:page]).per(5) if params[:sort_deadline]
+    @tasks = Task.order(priority: "ASC").page(params[:page]).per(5) if params[:sort_priority]
 
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:status].present?
-        @tasks = Task.search_title(params[:task][:title]).search_status(params[:task][:status])
+        @tasks = @tasks.search_title(params[:task][:title]).search_status(params[:task][:status]).page(params[:page]).per(5)
       elsif params[:task][:title].present?
-        @tasks = Task.search_title(params[:task][:title])
+        @tasks = @tasks.search_title(params[:task][:title]).page(params[:page]).per(5)
       elsif params[:task][:status].present?
-        @tasks = Task.search_status(params[:task][:status])
+        @tasks = @tasks.search_status(params[:task][:status]).page(params[:page]).per(5)
       end
       # @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%")if params[:task][:title].present?
       # @tasks = @tasks.where(status: params[:task][:status])if params[:task][:status].present?
     end
-    @tasks = Task.all.page(params[:page]).per(5)
+    # @tasks.page(params[:page]).per(5)
   end
 
   # GET /tasks/1 or /tasks/1.json

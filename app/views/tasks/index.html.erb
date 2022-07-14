@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= t('view.Tasks') %></h1>
-
+<div class="container mt-5 ml-20%">
 <%= form_with(scope: :task, url: tasks_path, local: true, method: :GET) do |form| %>
 <%= form.label :タスク名 %>
 <%= form.text_field :title %>
@@ -9,38 +8,46 @@
 <%= form.select :status, [["未着手", "2"], ["着手中", "3"], ["完了", "4"]], include_blank: true %>
 <%= form.submit "検索" %><%= button_to 'リセット', tasks_path %>
 <% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th scope = "col" ><%= link_to t('view.Title'), tasks_path(sort_title: "true") %></th>
-      <th><%= t('view.Content')%></th>
-      <th scope = "col" ><%= link_to t('view.Deadline'), tasks_path(sort_deadline: "true") %></th>
-      <th><%= t('view.Status')%></th>
-      <th><%= t('view.created_at')%></th>
-      <th scope = "col" ><%= link_to t('view.Priority'), tasks_path(sort_priority: "true") %></th>
-      <th colspan="3"></th>
-    </tr>    
-  </thead>
+<br><button class="btn btn-primary ml-2 " type="submit"><%= link_to t('view.New_Task'), new_task_path, class: "link" %></button>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr class = "task_row">
-        <td><%= task.title %></td>
-        <td><%= task.content %></td>
-        <td><%= task.deadline %></td>
-        <td><%= task.status %></td>
-        <td><%= task.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= task.priority %></td>
-        <td><%= link_to t('view.Show'), task %></td>
-        <td><%= link_to t('view.Edit'), edit_task_path(task.id) %></td>
-        <td><%= link_to t('view.Destroy'), task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="table-responsive-sm">
+  <div class="m-2 p-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope = "col" ><%= t('view.Title') %></th>
+          <th scope = "col"><%= t('view.Content')%></th>
+          <th scope = "col" ><%= link_to t('view.Deadline'), tasks_path(sort_deadline: "true") %></th>
+          <th scope = "col"><%= t('view.Status')%></th>
+          <th scope = "col"><%= t('view.created_at')%></th>
+          <th scope = "col" ><%= link_to t('view.Priority'), tasks_path(sort_priority: "true") %></th>
+          <th colspan="3"></th>
+        </tr>    
+      </thead>
+
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr class = "task_row">
+            <td><%= task.title %></td>
+            <td><%= task.content %></td>
+            <td><%= task.deadline %></td>
+            <td><%= task.status %></td>
+            <td><%= task.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <td><%= task.priority %></td>
+            <td><button type="button" class="btn btn-outline-primary"><%= link_to t('view.Show'), task %></button></td>
+            <td><button type="button" class="btn btn-outline-success"><%= link_to t('view.Edit'), edit_task_path(task.id) %></button></td>
+            <td><button type="button" class="btn btn-outline-danger"><%= link_to t('view.Destroy'), task, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <br>
 
-<%= link_to t('view.New_Task'), new_task_path %>
-<%= paginate @tasks %>
+<div class="d-flex align-items-center justify-content-center">
+<%= paginate @tasks, theme: 'twitter-bootstrap-4' %>
+</div>

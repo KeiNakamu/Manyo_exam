@@ -1,0 +1,13 @@
+.main {  
+  width: 300%;  
+}  
+.main div   {  
+  width: 80%;  
+  margin: 0 auto;  
+}
+
+
+.link {
+  text-decoration: none;
+  color: #ffffff;
+}
