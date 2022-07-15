@@ -31,7 +31,7 @@
       </thead>
 
       <tbody>
-        <% current_user.tasks.each do |task| %>
+        <% @tasks.each do |task| %>
           <tr class = "task_row">
             <td><%= task.user.name %></td>
             <td><%= task.title %></td>

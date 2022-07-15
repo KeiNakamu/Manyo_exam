@@ -2,19 +2,19 @@
 <p>メールアドレス: <%= @user.email %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong><%= t('view.Name') %>:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Email:</strong>
+  <strong><%= t('view.Email') %>:</strong>
   <%= @user.email %>
 </p>
 
 <div class="table-responsive-sm">
   <div class="m-2 p-5">
   <th><%= t('view.task_count') %></th>
-  <%= current_user.tasks.count %>
+  <%= @user.tasks.count %>
     <table class="table">
       <thead>
         <tr>
@@ -30,7 +30,7 @@
       </thead>
 
       <tbody>
-        <% current_user.tasks.each do |task| %>
+        <% @user.tasks.each do |task| %>
           <tr class = "task_row">
             <td><%= task.user.name %></td>
             <td><%= task.title %></td>
@@ -53,3 +53,4 @@
 
 <%= link_to t('view.Edit'), edit_user_path(@user) %> |
 <%= link_to t('view.list_page'), tasks_path %>
+

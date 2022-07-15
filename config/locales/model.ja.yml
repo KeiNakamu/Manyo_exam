@@ -1,6 +1,8 @@
 ja:
   view:
     User: 名前
+    Name: 名前
+    Email: メールアドレス
     Tasks: タスク管理
     Title: タスク名
     Content: 詳しい内容

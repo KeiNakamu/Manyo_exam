@@ -3,11 +3,13 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(5)
+    @tasks = current_user.tasks
     # @tasks = Task.order(created_at: "DESC")
     # @tasks = Task.order(title: "DESC").page(params[:page]).per(5) if params[:sort_title]
-    @tasks = Task.order(deadline: "DESC").page(params[:page]).per(5) if params[:sort_deadline]
-    @tasks = Task.order(priority: "ASC").page(params[:page]).per(5) if params[:sort_priority]
+    @tasks = @tasks.order(deadline: "DESC").page(params[:page]).per(5) if params[:sort_deadline]
+    @tasks = @tasks.order(priority: "ASC").page(params[:page]).per(5) if params[:sort_priority]
+    @tasks = @tasks.all.order(created_at: "DESC").page(params[:page]).per(5)
+    # binding.pry
 
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:status].present?
