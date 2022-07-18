@@ -9,7 +9,6 @@ class TasksController < ApplicationController
     @tasks = @tasks.order(deadline: "DESC").page(params[:page]).per(5) if params[:sort_deadline]
     @tasks = @tasks.order(priority: "ASC").page(params[:page]).per(5) if params[:sort_priority]
     @tasks = @tasks.all.order(created_at: "DESC").page(params[:page]).per(5)
-    # binding.pry
 
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:status].present?
@@ -19,9 +18,9 @@ class TasksController < ApplicationController
       elsif params[:task][:status].present?
         @tasks = @tasks.search_status(params[:task][:status]).page(params[:page]).per(5)
       end
+    end
       # @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%")if params[:task][:title].present?
       # @tasks = @tasks.where(status: params[:task][:status])if params[:task][:status].present?
-    end
     # @tasks.page(params[:page]).per(5)
   end
 

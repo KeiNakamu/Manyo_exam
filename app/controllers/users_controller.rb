@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :user_admin, only: %i[ index ]
+  before_action :ensure_correct_user, only: %i[ show ]
   skip_before_action :login_required, only: %i[ new create ]
 
   # GET /users or /users.json
@@ -53,6 +54,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def ensure_correct_user
+    @user = User.find(params[:id])
+      unless @user == current_user
+      redirect_to tasks_path, notice: "他人のページへはいけません"
     end
   end
 
