@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :user_admin, only: %i[ index ]
   skip_before_action :login_required, only: %i[ new create ]
 
   # GET /users or /users.json
@@ -63,6 +64,15 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :task_id)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
+    end
+
+    def user_admin
+      @users = User.all
+      if  current_user.admin == false
+          redirect_to root_path
+      else
+          render action: "index"
+      end
     end
 end
