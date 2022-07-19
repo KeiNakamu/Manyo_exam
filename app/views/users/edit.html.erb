@@ -1,0 +1,13 @@
+<h1>〜<%= @user.name %>さんのプロフィール〜</h1>
+<h1>ユーザー編集</h1>
+
+<%= form_with(model: @user, local: true) do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :email %>
+  <%= form.email_field :email %>
+
+  <%= form.submit "編集する" %>
+<%end%>
+<%= link_to t('view.Back'), user_path %>

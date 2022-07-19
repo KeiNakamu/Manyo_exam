@@ -1,0 +1,7 @@
+<h1>〜<%= @user.name %>さんのプロフィール〜</h1>
+<h1>ユーザー編集</h1>
+
+<%= render 'form', user: @user %>
+
+<%= link_to t('view.Show'), admin_user_path(@user)%>
+<%= link_to t('view.user_list_page'), admin_users_path %>

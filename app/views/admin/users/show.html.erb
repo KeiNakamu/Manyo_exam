@@ -1,16 +1,27 @@
+<h1>管理者ページ</h1>
+<h2>〜<%= @user.name %>さんのページ〜</h2>
 
-<div class="container mt-5 ml-20%">
-<%= form_with(scope: :task, url: tasks_path, local: true, method: :GET) do |form| %>
-<%= form.label :タスク名 %>
-<%= form.text_field :title %>
-<%= form.label :ステータス %>
-<%= form.select :status, [["未着手", "2"], ["着手中", "3"], ["完了", "4"]], include_blank: true %>
-<%= form.submit "検索" %><%= button_to 'リセット', tasks_path %>
+<% if @user == current_user %>
+  <%= link_to t("view.New_User"), new_task_path %>
+  <%= link_to t("view.Admin_Edit"), edit_admin_user_path(@user) %>
 <% end %>
-</div>
 
-<br><button class="btn btn-primary ml-2 " type="submit"><%= link_to t('view.New_Task'), new_task_path, class: "link" %></button>
 <br>
+<p>
+  <strong><%= t('view.Name') %>:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong><%= t('view.Email') %>:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong><%= t('view.admin') %>:</strong>
+  <%= @user.admin %>
+</p>
+
 <div class="table-responsive-sm">
   <div class="m-2 p-5">
     <table class="table">
@@ -19,16 +30,16 @@
           <th scope="col"><%= t('view.User') %></th>
           <th scope = "col" ><%= t('view.Title') %></th>
           <th scope = "col"><%= t('view.Content')%></th>
-          <th scope = "col" ><%= link_to t('view.Deadline'), tasks_path(sort_deadline: "true") %></th>
+          <th scope = "col" ><%= t('view.Deadline') %></th>
           <th scope = "col"><%= t('view.Status')%></th>
           <th scope = "col"><%= t('view.created_at')%></th>
-          <th scope = "col" ><%= link_to t('view.Priority'), tasks_path(sort_priority: "true") %></th>
+          <th scope = "col" ><%= t('view.Priority') %></th>
           <th colspan="3"></th>
         </tr>    
       </thead>
 
       <tbody>
-        <% @tasks.each do |task| %>
+        <% @user.tasks.each do |task| %>
           <tr class = "task_row">
             <td><%= task.user.name %></td>
             <td><%= task.title %></td>
@@ -47,8 +58,5 @@
   </div>
 </div>
 
-<br>
-
-<div class="d-flex align-items-center justify-content-center">
-<%= paginate @tasks, theme: 'twitter-bootstrap-4' %>
-</div>
+<%= link_to t('view.list_page'), tasks_path %> |
+<%= link_to t('view.user_list_page'), admin_users_path %>

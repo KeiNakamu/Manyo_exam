@@ -14,12 +14,15 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rails-i18n'
 gem 'kaminari'
 gem 'bootstrap4-kaminari-views'
+gem 'faker'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
   gem 'rexml'
+  gem 'pry-rails'
 
 end
 

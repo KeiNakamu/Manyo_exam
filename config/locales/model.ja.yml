@@ -1,18 +1,36 @@
 ja:
   view:
+    User: 名前
+    Name: 名前
+    Email: メールアドレス
+    Password_digest: パスワード
     Tasks: タスク管理
     Title: タスク名
     Content: 詳しい内容
     Show: 詳細
     Edit: 編集
+    Admin_Edit: 更新
     Destroy: 削除
     New_Task: 新規登録
+    New_User: ユーザー登録
     Editing_Task: 編集画面
     Back: 戻る
     Deadline: 終了期限
     Status: ステータス
     created_at: 登録日時
     Priority: 優先度
+    Profile: プロフィール
+    admin: 管理者
+    admin_page: 管理者ページ
+    my_page: マイページ
+    Sign_up: サインアップ
+    Login: ログイン
+    Logout: ログアウト
+    Log_in: ログイン画面
+    NewUser: 登録画面
+    user_list_page: ユーザー一覧
+    list_page: タスク一覧
+    task_count: タスク数
   activerecord:
     models:
       blog: ブログ

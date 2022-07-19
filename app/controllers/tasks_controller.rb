@@ -3,11 +3,12 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.order(created_at: "DESC").page(params[:page]).per(5)
+    @tasks = current_user.tasks
     # @tasks = Task.order(created_at: "DESC")
     # @tasks = Task.order(title: "DESC").page(params[:page]).per(5) if params[:sort_title]
-    @tasks = Task.order(deadline: "DESC").page(params[:page]).per(5) if params[:sort_deadline]
-    @tasks = Task.order(priority: "ASC").page(params[:page]).per(5) if params[:sort_priority]
+    @tasks = @tasks.order(deadline: "DESC").page(params[:page]).per(5) if params[:sort_deadline]
+    @tasks = @tasks.order(priority: "ASC").page(params[:page]).per(5) if params[:sort_priority]
+    @tasks = @tasks.all.order(created_at: "DESC").page(params[:page]).per(5)
 
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:status].present?
@@ -17,9 +18,9 @@ class TasksController < ApplicationController
       elsif params[:task][:status].present?
         @tasks = @tasks.search_status(params[:task][:status]).page(params[:page]).per(5)
       end
+    end
       # @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%")if params[:task][:title].present?
       # @tasks = @tasks.where(status: params[:task][:status])if params[:task][:status].present?
-    end
     # @tasks.page(params[:page]).per(5)
   end
 
@@ -39,7 +40,7 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     respond_to do |format|
       if @task.save
