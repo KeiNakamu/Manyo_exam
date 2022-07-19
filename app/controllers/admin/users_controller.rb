@@ -44,9 +44,9 @@ class Admin::UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     if @user.destroy
-      redirect_to admin_users_path, success: 'ユーザーを削除しました'
+      redirect_to admin_users_path(@user), notice: 'ユーザーを削除しました'
     else
-      redirect_to admin_users_path, notice: '管理者は必ず一人はいなければいけません!'
+      redirect_to root_path, notice: '管理者は必ず一人はいなければいけません!'
     end
   end
 

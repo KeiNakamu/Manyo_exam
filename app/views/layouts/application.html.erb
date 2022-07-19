@@ -21,10 +21,9 @@
     <% end %>
 
     <% if logged_in? %>
-    <%= link_to t('view.admin_page'), admin_user_path(current_user.id) %>
-      <% unless current_user.admin? %>
-        <%= link_to t('view.my_page'), user_path(current_user.id) %>
-      <% end %>
+      <%= link_to t('view.list_page'), tasks_path %> 
+      <%= link_to t('view.user_list_page'), admin_users_path %>
+      <%= link_to t('view.my_page'), user_path(current_user.id) %>
       <%= link_to t('view.Logout'), session_path(current_user.id), method: :delete %>
     <% else %>
       <%= link_to t('view.Sign_up'), new_user_path %>
