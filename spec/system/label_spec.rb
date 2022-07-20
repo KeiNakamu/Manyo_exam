@@ -2,9 +2,6 @@ require 'rails_helper'
 RSpec.describe 'ラベル機能', type: :system do
 
   let!(:user) { FactoryBot.create(:user) }
-  # let!(:task) { FactoryBot.create(:task, user:user) }
-  # let!(:second_task) { FactoryBot.create(:second_task, user:user) }
-  # let!(:third_task) { FactoryBot.create(:third_task, user:user) }
   let!(:label) { FactoryBot.create(:label) }
   let!(:second_label) { FactoryBot.create(:second_label) }
   let!(:third_label) { FactoryBot.create(:third_label) }
