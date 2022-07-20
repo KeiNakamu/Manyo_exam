@@ -38,6 +38,11 @@
     <%= form.select :priority, ["高", "中", "低"], include_blank: "選択" %>
   </div>
 
+  <% Label.all.each do |label| %>
+    <%= form.checkbox :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+    <label style="background-color: aquamarine"><%= label.name %></label>
+    <% end %>
+
 
   <div class="actions">
     <%= form.submit %>
