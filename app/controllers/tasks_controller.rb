@@ -17,10 +17,17 @@ class TasksController < ApplicationController
         @tasks = @tasks.search_title(params[:task][:title]).page(params[:page]).per(5)
       elsif params[:task][:status].present?
         @tasks = @tasks.search_status(params[:task][:status]).page(params[:page]).per(5)
+        # binding.pry
+      elsif params[:task][:label_id].present?
+        # binding.pry 
+        @tasks = @tasks.all
+        # binding.pry
+        @tasks = @tasks.joins(:labels).where(labels: { id: params[:task][:label_id] }).page(params[:page]).per(5)
       end
     end
-      # @tasks = Task.where('title LIKE ?', "%#{params[:task][:title]}%")if params[:task][:title].present?
-      # @tasks = @tasks.where(status: params[:task][:status])if params[:task][:status].present?
+      # @tasks = Task.where('title LIKE ?',"%#{params[:task][:title]}%").page(params[:page]).per(5) if params[:task][:title].present?
+      # @tasks = @tasks.where(status: params[:task][:status]).page(params[:page]).per(5) if params[:task][:status].present?
+      # @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }).page(params[:page]).per(5) if params[:label_id].present?
     # @tasks.page(params[:page]).per(5)
   end
 
@@ -83,7 +90,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:title, :content, :deadline, :status, :priority, :id)
+      params.require(:task).permit(:title, :content, :deadline, :status, :priority, :user_id, label_ids: [])
     end
 
     def sort_direction

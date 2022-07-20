@@ -20,3 +20,7 @@ User.create!([{name: '小林',email: 'test2205@test.com',password: '12341234',ad
               {name: '森塚',email: 'test12@test.com',password: '34567891'},
               {name: '山田',email: 'test13@test.com',password: '23456789'},
               {name: '吉田',email: 'test14@test.com',password: '12345678'}])
+
+5.times do |i|
+  Label.create!(name: "sample#{i + 1}")
+end
