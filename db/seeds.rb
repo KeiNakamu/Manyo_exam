@@ -20,3 +20,18 @@ User.create!([{name: '小林',email: 'test2205@test.com',password: '12341234',ad
               {name: '森塚',email: 'test12@test.com',password: '34567891'},
               {name: '山田',email: 'test13@test.com',password: '23456789'},
               {name: '吉田',email: 'test14@test.com',password: '12345678'}])
+
+10.times do |i|
+  Label.create!(name: "sample#{i + 1}")
+end
+
+10.times do |i|
+  Task.create!(
+    title: 'Test#{i + 1}',
+    content: 'Test#{i + 1}',
+    deadline: Time.new(2022,rand(8..12),rand(1..31)),
+    status: rand(2..4),
+    priority: rand(1..3),
+    user_id: "#{i + 1}"
+  )
+end

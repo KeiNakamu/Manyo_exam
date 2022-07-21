@@ -19,6 +19,7 @@ ja:
     Status: ステータス
     created_at: 登録日時
     Priority: 優先度
+    Label: ラベル
     Profile: プロフィール
     admin: 管理者
     admin_page: 管理者ページ

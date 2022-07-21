@@ -4,7 +4,9 @@
 <%= form.label :タスク名 %>
 <%= form.text_field :title %>
 <%= form.label :ステータス %>
-<%= form.select :status, [["未着手", "2"], ["着手中", "3"], ["完了", "4"]], include_blank: true %>
+<%= form.select :status, [["未着手", "2"], ["着手中", "3"], ["完了", "4"]], include_blank: "選択" %>
+<%= form.label :ラベル %>
+<%= form.select("label_id", Label.pluck(:name, :id), { include_blank: "ラベル" }) %>
 <%= form.submit "検索" %><%= button_to 'リセット', tasks_path %>
 <% end %>
 </div>
@@ -23,6 +25,7 @@
           <th scope = "col"><%= t('view.Status')%></th>
           <th scope = "col"><%= t('view.created_at')%></th>
           <th scope = "col" ><%= link_to t('view.Priority'), tasks_path(sort_priority: "true") %></th>
+          <th scope = "col"><%= t('view.Label')%></th>
           <th colspan="3"></th>
         </tr>    
       </thead>
@@ -37,6 +40,11 @@
             <td><%= task.status %></td>
             <td><%= task.created_at.strftime("%Y-%m-%d %H:%M") %></td>
             <td><%= task.priority %></td>
+            <td>
+            <% task.labels.each do |label| %>
+            <%= label.name %>
+            <% end %>
+            </td>
             <td><button type="button" class="btn btn-outline-primary"><%= link_to t('view.Show'), task %></button></td>
             <td><button type="button" class="btn btn-outline-success"><%= link_to t('view.Edit'), edit_task_path(task.id) %></button></td>
             <td><button type="button" class="btn btn-outline-danger"><%= link_to t('view.Destroy'), task, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>

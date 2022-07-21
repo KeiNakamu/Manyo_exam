@@ -117,7 +117,8 @@ RSpec.describe 'ユーザ登録、セッション機能、管理画面のテス�
     context '管理ユーザーがユーザーを削除した場合' do
       it 'ユーザーの削除ができる' do
         visit admin_users_path
-        click_button '削除', match: :first
+        page.all(".btn-outline-danger")[1].click
+        # click_button '削除', match: :first
         page.driver.browser.switch_to.alert.accept
         expect(page).to have_content '削除しました'
       end

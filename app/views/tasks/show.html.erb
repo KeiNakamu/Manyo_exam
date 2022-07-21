@@ -29,5 +29,12 @@
   <%= @task.created_at.strftime("%Y-%m-%d %H:%M") %>
 </p>
 
+<p>
+  <strong><%= t('view.Label') %></strong>
+    <% @task.labels.each do |label| %>
+      <%= label.name %>
+    <% end %>
+</p>
+
 <%= link_to t('view.Edit'), edit_task_path(@task) %> |
 <%= link_to t('view.list_page'), tasks_path %>
